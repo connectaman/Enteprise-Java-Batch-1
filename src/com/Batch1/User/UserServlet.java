@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +19,10 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<UserModel> users = new ArrayList<>();
 		users = UserDAO.getAllUser();
-		PrintWriter out =response.getWriter();
-		out.println(users);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ViewUser.jsp");
+		request.setAttribute("data",users);
+		dispatcher.forward(request, response);
 	}
 
 
