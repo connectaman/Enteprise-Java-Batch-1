@@ -1,0 +1,15 @@
+img{
+  width:300px;
+}
+.foot{
+  background-color:grey;
+}
+.logo {
+  text-align: center;
+  color:white;
+}
+.links{
+  text-align: center;
+  padding-top:30px;
+  color:white;
+}
