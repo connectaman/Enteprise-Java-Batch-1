@@ -1,4 +1,4 @@
-package com.Batch1.User;
+package com.Batch_1.User;
 
 public class UserModel {
 private int id;

@@ -1,9 +1,6 @@
-package com.Batch1.User;
+package com.Batch_1.User;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,19 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/UserServlet")
-public class UserServlet extends HttpServlet {
+@WebServlet("/DeleteUser")
+public class DeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<UserModel> users = new ArrayList<>();
-		users = UserDAO.getAllUser();
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ViewUser.jsp");
-		request.setAttribute("data",users);
-		dispatcher.forward(request, response);
+		int id = Integer.parseInt(request.getParameter("id"));
+		boolean res = UserDAO.deleteUser(id);
+		if(res) {
+			response.sendRedirect("UserServlet");
+		}
+		else
+		{
+			RequestDispatcher dispatcher = request.getRequestDispatcher("UserServlet");
+			request.setAttribute("status","Error in deleting the user");
+			dispatcher.forward(request, response);
+		}
 	}
-
 
 
 }
